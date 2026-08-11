@@ -75,9 +75,11 @@ const Sidebar = () => {
                     </button>
                 ))}
 
-                {/* {filteredUsers.length === 0 && (
-                    <div className="text-center text-zinc-500 py-4">No online users</div>
-                )} */}
+                {
+                    filteredUsers.length === 0 && (
+                        <div className="text-center text-zinc-500 py-4">No online users</div>
+                    )
+                }
             </div>
         </aside>
     );
