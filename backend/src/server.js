@@ -12,8 +12,6 @@ import { connectDB } from "./lib/db.js"
 import messageRouter from "./routes/message.route.js"
 import { app, server } from "./lib/socket.js"
 
-
-
 app.use(express.json({ limit: "10mb" })) // max image upload size. default is 100kb
 app.use(cookieParser())
 app.use(cors({
@@ -30,7 +28,8 @@ app.use("/api/messages", messageRouter)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
-    app.get("/*", (req, res) => {
+    // Updated wildcard route to support path-to-regexp v8+
+    app.get("/{*splat}", (req, res) => {
         res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
     })
 }
